@@ -1,0 +1,19 @@
+{
+  "name": "colorramp",
+  "version": "1.0.0",
+  "description": "Color ramp/gradient generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjornreppen/colorramp.git"
+  },
+  "author": "Bjorn Reppen <bjreppen@gmail.com> (https://github.com/bjornreppen)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjornreppen/colorramp/issues"
+  },
+  "homepage": "https://github.com/bjornreppen/colorramp#readme"
+}
