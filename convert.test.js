@@ -6,8 +6,23 @@ test('matrix multiply', () => {
   expect(actual).toEqual(expected)
 })
 
+test('#FDE725 to xyz', () => {
+  const actual = rgbToXyz([253, 231, 37])
+  expect(actual).toEqual(
+    [
+      69.41785558045027,
+      78.1680461121995,
+      13.179494122477161
+    ])
+})
+
 test('#4080ff to xyz', () => {
   const actual = rgbToXyz([64, 128, 255])
+  expect(actual).toMatchSnapshot()
+})
+
+test('#ffffff to xyz', () => {
+  const actual = rgbToXyz([1, 1, 1])
   expect(actual).toMatchSnapshot()
 })
 
@@ -76,14 +91,32 @@ test('roundtrip lch random', () => {
   expect(roundtripRgbLch(expected)).toEqual(expected)
 })
 
+test('roundtrip xyz viridis', () => {
+  const expected = [253, 231, 37]
+  expect(roundtripRgbXyz(expected)).toEqual(expected)
+})
+
+test('roundtrip lab viridis', () => {
+  const expected = [253, 231, 37]
+  expect(roundtripRgbLab(expected)).toEqual(expected)
+})
+
+test('roundtrip lch viridis', () => {
+  const expected = [253, 231, 37]
+  expect(roundtripRgbLch(expected)).toEqual(expected)
+})
+
+function roundtripRgbXyz (rgb) {
+  const lab = rgbToXyz(rgb)
+  return xyzToRgb(lab)
+}
+
 function roundtripRgbLab (rgb) {
   const lab = rgbToLab(rgb)
-  const actual = labToRgb(lab)
-  return actual
+  return labToRgb(lab)
 }
 
 function roundtripRgbLch (rgb) {
-  const lab = rgbToLch(rgb)
-  const actual = lchToRgb(lab)
-  return actual
+  const lch = rgbToLch(rgb)
+  return lchToRgb(lch)
 }
