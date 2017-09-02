@@ -4,7 +4,7 @@
   "description": "Color ramp/gradient generator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/bjornreppen/colorramp/issues"
   },
-  "homepage": "https://github.com/bjornreppen/colorramp#readme"
+  "homepage": "https://github.com/bjornreppen/colorramp#readme",
+  "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^20.0.4"
+  }
 }
