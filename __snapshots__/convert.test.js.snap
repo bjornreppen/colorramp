@@ -1,65 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`#1030a0 to lch 1`] = `
-Array [
-  26.046035009984124,
-  71.65051451250467,
-  298.62341843266347,
-]
-`;
-
-exports[`#4080ff to xyz 1`] = `
-Array [
-  27.88352394741858,
-  23.748331653178234,
-  97.72200721601958,
-]
+Object {
+  "C": NaN,
+  "L": NaN,
+  "h": NaN,
+}
 `;
 
 exports[`#8040ff to lab 1`] = `
-Array [
-  46.27935378361805,
-  67.32952112002688,
-  -84.45226310080702,
-]
+Object {
+  "L": 46.27935378361805,
+  "a": 67.32952112002688,
+  "b": -84.45226310080702,
+}
 `;
 
-exports[`#ffffff to xyz 1`] = `
-Array [
-  0.028850239786317004,
-  0.03035269835488375,
-  0.03305408850846841,
-]
+exports[`roundtrip lab viridis 1`] = `
+Object {
+  "b": 84,
+  "g": 1,
+  "r": 68,
+}
 `;
 
-exports[`roundtrip xyz black 1`] = `
-Array [
-  0,
-  0,
-  0,
-]
+exports[`roundtrip lab white 1`] = `
+Object {
+  "b": 255,
+  "g": 255,
+  "r": 255,
+}
+`;
+
+exports[`roundtrip lch #ff8040 1`] = `
+Object {
+  "b": 64,
+  "g": 128,
+  "r": 255,
+}
+`;
+
+exports[`roundtrip lch viridis 1`] = `
+Object {
+  "b": 84,
+  "g": 1,
+  "r": 68,
+}
 `;
 
 exports[`roundtrip xyz random 1`] = `
-Array [
-  192,
-  130,
-  27,
-]
+Object {
+  "b": 84,
+  "g": 1,
+  "r": 68,
+}
 `;
 
-exports[`roundtrip xyz white 1`] = `
-Array [
-  255,
-  255,
-  255,
-]
+exports[`roundtrip xyz viridis 1`] = `
+Object {
+  "b": 84,
+  "g": 1,
+  "r": 68,
+}
 `;
 
 exports[`xyz to rgb 1`] = `
-Array [
-  0,
-  255,
-  255,
-]
+Object {
+  "b": NaN,
+  "g": NaN,
+  "r": NaN,
+}
 `;

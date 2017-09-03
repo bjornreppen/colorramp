@@ -1,33 +1,19 @@
-import {multiply, rgbToXyz, rgbToLab, rgbToLch, labToRgb, lchToRgb, xyzToRgb} from './convert'
+import {hexToRgb, rgbToXyz, rgbToLab, rgbToLch, labToRgb, lchToRgb, xyzToRgb} from './convert'
 
-test('matrix multiply', () => {
-  const expected = [[5], [11]]
-  const actual = multiply([[1, 2], [3, 4]], [[1], [2]])
-  expect(actual).toEqual(expected)
-})
+const viridis1 = hexToRgb('#440154')
 
 test('#FDE725 to xyz', () => {
-  const actual = rgbToXyz([253, 231, 37])
+  const actual = rgbToXyz(hexToRgb('#FDE725'))
   expect(actual).toEqual(
-    [
-      69.41785558045027,
-      78.1680461121995,
-      13.179494122477161
-    ])
-})
-
-test('#4080ff to xyz', () => {
-  const actual = rgbToXyz([64, 128, 255])
-  expect(actual).toMatchSnapshot()
-})
-
-test('#ffffff to xyz', () => {
-  const actual = rgbToXyz([1, 1, 1])
-  expect(actual).toMatchSnapshot()
+    {
+      x: 69.41785558045027,
+      y: 78.1680461121995,
+      z: 13.179494122477161
+    })
 })
 
 test('#8040ff to lab', () => {
-  const actual = rgbToLab([128, 64, 255])
+  const actual = rgbToLab(hexToRgb('#8040FF'))
   expect(actual).toMatchSnapshot()
 })
 
@@ -42,68 +28,30 @@ test('xyz to rgb', () => {
   expect(actual).toMatchSnapshot()
 })
 
-test('roundtrip xyz black', () => {
-  const xyz = rgbToXyz([0, 0, 0])
-  const actual = xyzToRgb(xyz)
-  expect(actual).toMatchSnapshot()
-})
-
-test('roundtrip xyz white', () => {
-  const xyz = rgbToXyz([255, 255, 255])
-  const actual = xyzToRgb(xyz)
-  expect(actual).toMatchSnapshot()
-})
-
 test('roundtrip xyz random', () => {
-  const expected = [192, 130, 27]
-  const xyz = rgbToXyz(expected)
+  const xyz = rgbToXyz(viridis1)
   const actual = xyzToRgb(xyz)
   expect(actual).toMatchSnapshot()
-})
-
-test('roundtrip lab black', () => {
-  const expected = [0, 0, 0]
-  expect(roundtripRgbLab(expected)).toEqual(expected)
 })
 
 test('roundtrip lab white', () => {
-  const expected = [255, 255, 255]
-  expect(roundtripRgbLab(expected)).toEqual(expected)
-})
-
-test('roundtrip lab #a08040', () => {
-  const expected = [192, 128, 64]
-  expect(roundtripRgbLab(expected)).toEqual(expected)
-})
-
-test('roundtrip lch #ff00ff', () => {
-  const expected = [255, 0, 255]
-  expect(roundtripRgbLch(expected)).toEqual(expected)
+  expect(roundtripRgbLab(hexToRgb('#ffffff'))).toMatchSnapshot()
 })
 
 test('roundtrip lch #ff8040', () => {
-  const expected = [255, 128, 64]
-  expect(roundtripRgbLch(expected)).toEqual(expected)
-})
-
-test('roundtrip lch random', () => {
-  const expected = [192, 130, 27]
-  expect(roundtripRgbLch(expected)).toEqual(expected)
+  expect(roundtripRgbLch(hexToRgb('#ff8040'))).toMatchSnapshot()
 })
 
 test('roundtrip xyz viridis', () => {
-  const expected = [253, 231, 37]
-  expect(roundtripRgbXyz(expected)).toEqual(expected)
+  expect(roundtripRgbXyz(viridis1)).toMatchSnapshot()
 })
 
 test('roundtrip lab viridis', () => {
-  const expected = [253, 231, 37]
-  expect(roundtripRgbLab(expected)).toEqual(expected)
+  expect(roundtripRgbLab(viridis1)).toMatchSnapshot()
 })
 
 test('roundtrip lch viridis', () => {
-  const expected = [253, 231, 37]
-  expect(roundtripRgbLch(expected)).toEqual(expected)
+  expect(roundtripRgbLch(viridis1)).toMatchSnapshot()
 })
 
 function roundtripRgbXyz (rgb) {
