@@ -2,9 +2,9 @@
 
 exports[`#1030a0 to lch 1`] = `
 Object {
-  "C": NaN,
-  "L": NaN,
-  "h": NaN,
+  "C": 71.65051451250467,
+  "L": 26.046035009984124,
+  "h": 298.62341843266347,
 }
 `;
 
@@ -66,8 +66,8 @@ Object {
 
 exports[`xyz to rgb 1`] = `
 Object {
-  "b": NaN,
-  "g": NaN,
-  "r": NaN,
+  "b": 255,
+  "g": 255,
+  "r": 0,
 }
 `;

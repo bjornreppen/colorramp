@@ -1,16 +1,17 @@
 import { rgbToLch, lchToRgb } from './convert'
+import {Rgb, Lch} from './colorModels'
 
-function slerpLinear (start, end, fraction) {
+function slerpLinear (start: number, end: number, fraction: number) {
   return start * (1 - fraction) + end * fraction
 }
-function slerpPolar (start, end, fraction) {
+function slerpPolar (start: number, end: number, fraction: number) {
   let distance = end - start
 //  if (distance > Math.PI) distance -= Math.PI
 //  if (distance < -Math.PI) distance += Math.PI
   return start + distance * fraction
 }
 
-function slerp (start, end, fraction) {
+function slerp (start: Lch, end: Lch, fraction: number) {
   let r = {
     L: slerpLinear(start.L, end.L, fraction),
     C: slerpLinear(start.C, end.C, fraction),
@@ -20,7 +21,7 @@ function slerp (start, end, fraction) {
 }
 
 // RGB values as int (0-255) array [r,g,b]
-function buildRamp (startRgb, endRgb, steps = 256) {
+function buildRamp (startRgb: Rgb, endRgb: Rgb, steps: number = 256) {
   const l1 = rgbToLch(startRgb)
   const l2 = rgbToLch(endRgb)
   let ramp = []

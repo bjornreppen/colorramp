@@ -1,4 +1,6 @@
-function rgbToXyz (rgb) {
+import {Rgb, Lab, Lch, Xyz} from './colorModels'
+
+function rgbToXyz (rgb : Rgb) {
   let R = rgb.r / 255
   let G = rgb.g / 255
   let B = rgb.b / 255
@@ -19,7 +21,7 @@ function rgbToXyz (rgb) {
   return {x, y, z}
 }
 
-function xyzToRgb (xyz) {
+function xyzToRgb (xyz: Xyz) {
 // X, Y and Z input refer to a D65/2° standard illuminant.
 // sR, sG and sB (standard RGB) output range = 0 ÷ 255
   let X = xyz.x / 100
@@ -44,7 +46,7 @@ function xyzToRgb (xyz) {
   }
 }
 
-function labf (t) {
+function labf (t : number) {
   const sigma2 = Math.pow(6 / 29, 2)
   const sigma3 = Math.pow(6 / 29, 3)
   return t > sigma3
@@ -52,7 +54,7 @@ function labf (t) {
     : t / (3 * sigma2 + 4 / 29)
 }
 
-function labf1 (t) {
+function labf1 (t : number) {
   const sigma = 6 / 29
   const sigma2 = Math.pow(sigma, 2)
   return t > sigma
@@ -61,7 +63,7 @@ function labf1 (t) {
 }
 const LabWhitepoint = {xn: 95.047, yn: 100, zn: 108.883}
 
-function xyzToLab (xyz) {
+function xyzToLab (xyz : Xyz) {
   const x = xyz.x / LabWhitepoint.xn
   const y = xyz.y / LabWhitepoint.yn
   const z = xyz.z / LabWhitepoint.zn
@@ -71,7 +73,7 @@ function xyzToLab (xyz) {
   return {L, a, b}
 }
 
-function labToXyz (lab) {
+function labToXyz (lab: Lab) {
   const L = lab.L
   const a = lab.a
   const b = lab.b
@@ -81,7 +83,7 @@ function labToXyz (lab) {
   return {x, y, z}
 }
 
-function labToLch (lab) {
+function labToLch (lab: Lab) {
   const L = lab.L
   const a = lab.a
   const b = lab.b
@@ -93,48 +95,48 @@ function labToLch (lab) {
   return {L, C, h}
 }
 
-function lchToLab (lab) {
-  const L = lab.L
-  const C = lab.C
-  const h = lab.h / 180 * Math.PI
+function lchToLab (lch: Lch) {
+  const L = lch.L
+  const C = lch.C
+  const h = lch.h / 180 * Math.PI
   const a = C * Math.cos(h)
   const b = C * Math.sin(h)
   return {L, a, b}
 }
 
-function xyzToLch (xyz) {
+function xyzToLch (xyz : Xyz) {
   const lab = xyzToLab(xyz)
   return labToLch(lab)
 }
 
-function rgbToLab (rgb) {
+function rgbToLab (rgb: Rgb) {
   const xyz = rgbToXyz(rgb)
   return xyzToLab(xyz)
 }
 
-function rgbToLch (rgb) {
+function rgbToLch (rgb : Rgb) {
   const xyz = rgbToXyz(rgb)
   return xyzToLch(xyz)
 }
 
-function labToRgb (lab) {
+function labToRgb (lab: Lab) {
   const xyz = labToXyz(lab)
  // console.log('xyz', xyz)
   return xyzToRgb(xyz)
 }
 
-function lchToRgb (lch) {
+function lchToRgb (lch: Lch) {
   const lab = lchToLab(lch)
 //  console.log('lab', lab)
   return labToRgb(lab)
 }
 
 // Clamp to byte range 0-255
-function clamp2Byte (f) {
+function clamp2Byte (f: number) {
   return Math.round(Math.max(0, Math.min(255, f)))
 }
 
-function hexToRgb (hex) {
+function hexToRgb (hex : string) {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
@@ -146,7 +148,7 @@ function hexToRgb (hex) {
     r: parseInt(result[1], 16),
     g: parseInt(result[2], 16),
     b: parseInt(result[3], 16)
-  } : null
+  } : {r:0,g:0,b:0}
 }
 
 export { hexToRgb, rgbToXyz, rgbToLab, rgbToLch, labToRgb, lchToRgb, xyzToRgb}

@@ -1,29 +1,33 @@
 import {slerp, buildRamp} from './ramp'
-import {hexToRgb} from './convert'
+import {rgbToLch, hexToRgb} from './convert'
+import {Rgb, Lab, Lch, Xyz} from './colorModels'
 
-const red = [255, 0, 0]
-const blue = [0, 0, 255]
+const red = {r:255, g:0, b:0}
+const blue = {r:0, g:0, b:255}
+const lchRed =     rgbToLch(red)
+const lchBlue = rgbToLch(blue)
 
 test('build ramp', () => {
   const actual = buildRamp(red, blue, 2)
   expect(actual).toMatchSnapshot()
 })
+
 test('slerp 0', () => {
-  const actual = slerp(red, blue, 0)
+  const actual = slerp(lchRed, lchBlue, 0)
   expect(actual).toMatchSnapshot()
 })
 
 test('slerp 50', () => {
-  const actual = slerp(red, blue, 0.5)
+  const actual = slerp(lchRed, lchBlue, 0.5)
   expect(actual).toMatchSnapshot()
 })
 
 test('slerp 100', () => {
-  const actual = slerp(red, blue, 1)
+  const actual = slerp(lchRed, lchBlue, 1)
   expect(actual).toMatchSnapshot()
 })
 
-function toArgb (rgb) {
+function toArgb (rgb: Rgb) {
   return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
 }
 
@@ -73,7 +77,7 @@ test('ramp magma', () => {
   console.log('<h2>Magma</h2>' + ramp2html(ramp))
 })
 
-function ramp2html (ramp) {
-  const arr = ramp.map(x => `<div style="display: inline; float: left; width: 5px; height: 30px; background-color: ${toArgb(x)}"></div>`)
+function ramp2html (ramp : Array<Rgb>) {
+  const arr = ramp.map(x=> `<div style="display: inline; float: left; width: 5px; height: 30px; background-color: ${toArgb(x)}"></div>`)
   return arr.join('')
 }
